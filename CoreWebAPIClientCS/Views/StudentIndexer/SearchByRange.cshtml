@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search</h1>
+
+<form asp-action="SearchByRange">
+    Start range: <input type="text" name="min" /><br />
+    End range: <input type="text" name="max" /><br />
+    <input type="submit" value="Search" class="btn btn-primary" />
+</form>
+<br />
+<hr />
+<br />
+@if (ViewData["students"] != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    StudentId
+                </th>
+                <th>
+                    StudentName
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Contact
+                </th>
+                <th>
+                    courseName
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<MyStudent>)ViewData["students"])
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Contact)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.courseName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+

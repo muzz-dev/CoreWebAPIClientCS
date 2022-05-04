@@ -1,0 +1,17 @@
+﻿@model List<Tuple<int, string, float>>
+@{
+    ViewData["Title"] = "ViewTupleCollection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>View Tuple Collection</h1>
+
+<br />
+@foreach (var tpl in @Model)
+{
+    <i>@tpl.Item2</i>
+    <b>@tpl.Item1</b>
+    <u>@tpl.Item3</u>
+    <br />
+}
+

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<CoreWebAPIClientCS.Models.MyCourse>
+@using CoreWebAPIClientCS.Models;
+@using System.Collections.Generic;
+
+@{
+    ViewData["Title"] = "SearchByCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search By Course</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SearchByCourse">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.CourseName)
+
+                <select name="dropdownCourse" id="dropdownCourse">
+                    @foreach (var item in Model)
+                    {
+                        <option value=@item.CourseId>@item.CourseName</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        @if (ViewBag.searchByCourseValues != null)
+        {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Student Id
+                    </th>
+                    <th>
+                        Student Name
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Contact
+                    </th>
+                    <th>
+                        Course Name
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@ViewBag.searchByCourseValues;*@
+                @foreach (var item in (MyStudent[])ViewBag.searchByCourseValues)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Contact)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.courseName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
